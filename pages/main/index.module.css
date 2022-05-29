@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--light-white);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 10px;
+  flex-wrap: wrap;
+}
+
+.left-bar {
+  width: 25%;
+  border-radius: 25px;
+  padding: 25px;
+  overflow-y: scroll;
+}
+.ideas-container {
+  width: 40%;
+  overflow-y: scroll;
+}
+.top-ideas {
+  width: 25%;
+  overflow-y: scroll;
+}

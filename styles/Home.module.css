@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  display: flex;
 }
 
 .footer {
@@ -55,7 +56,11 @@
   line-height: 1.5;
   font-size: 1.5rem;
 }
-
+.archi {
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
 .code {
   background: #fafafa;
   border-radius: 5px;
