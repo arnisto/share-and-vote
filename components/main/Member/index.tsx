@@ -5,6 +5,8 @@ const Member = (props: any) => {
     firstName = "Unkown",
     lastName = "Unkown",
     avatar = "/unkownMember.jpg",
+    followers,
+    following,
   } = props;
   return (
     <div className={styles.container}>
@@ -23,11 +25,8 @@ const Member = (props: any) => {
           <span>@LamjedGaidi</span>
         </div>
       </div>
-      <button
-        className={styles.follow}
-        onClick={() => alert("you gonna follow him in an updated version")}
-      >
-        Follow
+      <button className={styles.follow} onClick={() => following()}>
+        {followers?.includes(1) ? "Following" : "Follow"}
       </button>
     </div>
   );

@@ -1,5 +1,9 @@
-import styles from "./Header.module.css";
 import Image from "next/image";
+
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+
+import styles from "./Header.module.css";
+
 const Header = (props: any) => {
   const {
     firstName = "Unkown",
@@ -17,13 +21,19 @@ const Header = (props: any) => {
             alt="author is avatar"
           />
         </div>
-        <div>
-          lamjed gaidi
+        <div className={styles.infos}>
+          <span className={styles.name}>
+            <b>
+              <i>{`${lastName} ${firstName}`}</i>
+            </b>
+          </span>
           <br />
-          @lamjed
+          <span className={styles.alt}>{`@${lastName}${firstName}`}</span>
         </div>
       </div>
-      <div>more</div>
+      <div>
+        <MoreHorizIcon />
+      </div>
     </div>
   );
 };

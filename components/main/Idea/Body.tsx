@@ -1,14 +1,16 @@
 import styles from "./Body.module.css";
 import Image from "next/image";
 const Body = (props: any) => {
-  const {} = props;
+  const { title, description } = props;
   return (
     <div className={styles.container}>
       <div>
-        <h3>As children, we were promised a better future.</h3>
+        <h3>{title || "As children, we were promised a better future."}</h3>
       </div>
       <div>
-        We are living in a technological golden age, yet live busier, more
+        {`${
+          description ||
+          `We are living in a technological golden age, yet live busier, more
         difficult lives than our recent ancestors. Loneliness, depression and
         other related mental health conditions are compromising our general
         health and wellbeing. People in some first world countries are forced to
@@ -16,7 +18,8 @@ const Body = (props: any) => {
         falling into poverty or homelessness. Inequality is increasing and the
         gap between the rich and the poor is ever widening. While towns and
         cities are becoming smarter, the people who live in them are often
-        forgotten
+        forgotten`
+        }`}
       </div>
     </div>
   );

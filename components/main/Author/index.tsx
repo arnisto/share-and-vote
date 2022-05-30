@@ -1,14 +1,20 @@
-import styles from "./index.module.css";
 import Image from "next/image";
+
+import { useDispatch, useSelector } from "react-redux";
+import { toggleAuthor } from "../../../redux/main/actions";
+
+import styles from "./index.module.css";
 const Author = (props: any) => {
   const {} = props;
+  const dispatch = useDispatch();
+  const { authors, lamjed } = useSelector((state: any) => state.main);
+  const author = lamjed ? authors[0] : authors["1"];
+  const { id, firstName, lastName, avatar } = author;
   return (
     <div className={styles.container}>
       <div className={styles.avatar}>
         <Image
-          src={
-            "https://cdn.pixabay.com/photo/2012/11/28/01/29/man-67467_960_720.jpg"
-          }
+          src={avatar}
           layout="fill"
           objectFit="contain"
           alt="author is avatar"
@@ -17,7 +23,7 @@ const Author = (props: any) => {
       <div>
         <span>
           <b>
-            <i>Lamjed Gaidi</i>
+            <i>{`${lastName} ${firstName}`}</i>
           </b>
         </span>
       </div>
@@ -37,7 +43,13 @@ const Author = (props: any) => {
           <span>rank</span>
         </div>
       </div>
-      <div>My Profile</div>
+      <div>
+        My Profile
+        <label className="switch">
+          <input onChange={() => dispatch(toggleAuthor())} type="checkbox" />
+          <span className="slider"></span>
+        </label>
+      </div>
     </div>
   );
 };

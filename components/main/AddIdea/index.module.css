@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #040c18;
   padding: 10px;
   margin: 5px 0px;
   border-radius: 10px;
@@ -9,15 +9,22 @@
 .ipt-title {
   border: none;
   outline: none;
-  height: 40px;
-  background-color: var(--google-light-white);
+  height: 30px;
+  background-color: #031b34;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
 }
 .ipt-desc {
   border: none;
   outline: none;
-  background-color: var(--google-light-white);
+  background-color: #031b34;
+  color: white;
   margin: 5px 0px;
   max-width: 100%;
+  border-radius: 10px;
+  min-height: 100px;
+  padding: 5px 10px;
 }
 .ipt-file-container {
   border: none;
@@ -27,4 +34,15 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+.add-btn {
+  outline: none;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  background-color: #040c18;
+  cursor: pointer;
+}
+.add-btn:hover {
+  background-color: #031b34;
 }

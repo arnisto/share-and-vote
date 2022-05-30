@@ -1,4 +1,6 @@
-import styles from "./index.module.css";
+import { useState } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
 
 import Author from "../../components/main/Author";
 import Idea from "../../components/main/Idea";
@@ -8,170 +10,86 @@ import Search from "../../components/main/Search";
 import TopIdea from "../../components/main/TopIdea";
 import AddIdea from "../../components/main/AddIdea";
 
+import { setIdeas, setMembers } from "../../redux/main/actions";
+
+import styles from "./index.module.css";
+
 const Main = (props: any) => {
   const {} = props;
+  const dispatch = useDispatch();
+  const { ideas, topIdeas, members, authors, lamjed } = useSelector(
+    (state: any) => state.main
+  );
+  const author = lamjed ? authors[0] : authors["1"];
+  const like: Function = (idx: any) => {
+    // this function will be eliminated if we use an api
 
-  const _topIdeas = [
-    {
-      title: "#idea_num_1",
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2017/06/26/02/47/man-2442565_960_720.jpg",
-      },
-    },
-    {
-      title: "#idea_num_2",
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2012/04/18/23/36/boy-38262_960_720.png",
-      },
-    },
-    {
-      title: "#idea_num_3",
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2017/06/26/02/47/man-2442565_960_720.jpg",
-      },
-    },
-    {
-      title: "#idea_num_4",
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_960_720.jpg",
-      },
-    },
-    {
-      title: "#idea_num_5",
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2015/07/20/13/01/man-852770_960_720.jpg",
-      },
-    },
-  ];
-  const _ideas = [
-    {
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2017/06/26/02/47/man-2442565_960_720.jpg",
-      },
-    },
-    {
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2012/04/18/23/36/boy-38262_960_720.png",
-      },
-    },
-    {
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2017/06/26/02/47/man-2442565_960_720.jpg",
-      },
-    },
-    {
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_960_720.jpg",
-      },
-    },
-    {
-      up: 10,
-      down: 1,
-      author: {
-        firstName: "lamjed",
-        lastName: "gaidi",
-        avatar:
-          "https://cdn.pixabay.com/photo/2015/07/20/13/01/man-852770_960_720.jpg",
-      },
-    },
-  ];
-  const _members = [
-    {
-      firstName: "lamjed",
-      lastName: "gaidi",
-      avatar:
-        "https://cdn.pixabay.com/photo/2017/06/26/02/47/man-2442565_960_720.jpg",
-    },
-    {
-      firstName: "lamjed",
-      lastName: "gaidi",
-      avatar:
-        "https://cdn.pixabay.com/photo/2012/04/18/23/36/boy-38262_960_720.png",
-    },
-    {
-      firstName: "lamjed",
-      lastName: "gaidi",
-      avatar:
-        "https://cdn.pixabay.com/photo/2017/06/26/02/47/man-2442565_960_720.jpg",
-    },
-    {
-      firstName: "lamjed",
-      lastName: "gaidi",
-      avatar:
-        "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_960_720.jpg",
-    },
-    {
-      firstName: "lamjed",
-      lastName: "gaidi",
-      avatar:
-        "https://cdn.pixabay.com/photo/2015/07/20/13/01/man-852770_960_720.jpg",
-    },
-  ];
+    let _ideas = ideas;
+    let _ideaToBeUpdated = ideas?.[idx];
+    _ideaToBeUpdated["up"] = _ideaToBeUpdated?.up?.includes(idx)
+      ? _ideaToBeUpdated?.up
+      : [...(_ideaToBeUpdated?.up || []), idx];
+    _ideaToBeUpdated["down"] = (_ideaToBeUpdated?.down || []).filter(
+      (e: any) => e !== idx
+    );
+    _ideas[idx] = _ideaToBeUpdated;
+    author?.id !== _ideaToBeUpdated?.author?.id && dispatch(setIdeas(_ideas));
+  };
+
+  const disLike: Function = (idx: any) => {
+    // this function will be eliminated if we use an api
+    let _ideas = ideas;
+    let _ideaToBeUpdated = ideas?.[idx];
+    _ideaToBeUpdated["down"] = _ideaToBeUpdated?.down?.includes(idx)
+      ? _ideaToBeUpdated?.down
+      : [...(_ideaToBeUpdated?.down || []), idx];
+    _ideaToBeUpdated["up"] = (_ideaToBeUpdated?.up || []).filter(
+      (e: any) => e !== idx
+    );
+    _ideas[idx] = _ideaToBeUpdated;
+    author?.id !== _ideaToBeUpdated?.author?.id && dispatch(setIdeas(_ideas));
+  };
+  const following: Function = (idx: any, authorID: any) => {
+    // this function will be eliminated if we use an api
+    let _members = members;
+    let _memberToBeUpdated = members?.[idx];
+    _memberToBeUpdated["followers"] = _memberToBeUpdated?.followers?.includes(
+      authorID
+    )
+      ? (_memberToBeUpdated?.followers || []).filter((e: any) => e !== authorID)
+      : [...(_memberToBeUpdated?.followers || []), authorID];
+    _members[idx] = _memberToBeUpdated;
+    dispatch(setMembers(_members));
+  };
   return (
     <div className={styles.container}>
       <div className={styles["left-bar"]}>
         <Search />
         <Author />
         <p>Other members</p>
-        {_members?.map((member, index) => (
-          <Member {...member} key={index} />
+        {members?.map((member: any, index: Number) => (
+          <Member
+            {...member}
+            following={() => following(index, author?.id || 1)}
+            key={index}
+          />
         ))}
       </div>
       <div className={styles["ideas-container"]}>
         <AddIdea />
-        {_ideas?.map((idea, index) => (
-          <Idea {...idea} key={index} />
+        {ideas?.map((idea: any, index: number) => (
+          <Idea
+            {...idea}
+            like={() => like(index)}
+            disLike={() => disLike(index)}
+            key={index}
+          />
         ))}
       </div>
       <div className={styles["top-ideas"]}>
         <Nav />
         top ideas :
-        {_topIdeas?.map((idea, index) => (
+        {topIdeas?.map((idea: any, index: Number) => (
           <TopIdea {...idea} key={index} />
         ))}
       </div>

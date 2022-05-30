@@ -1,7 +1,12 @@
 .container {
-  background-color: white;
   margin: 5px 0px;
   padding: 10px;
   width: 100%;
   border-radius: 10px;
+  background: rgb(4, 44, 84);
+  background: linear-gradient(
+    90deg,
+    rgba(4, 44, 84, 1) 0%,
+    rgba(27, 119, 220, 1) 100%
+  );
 }
