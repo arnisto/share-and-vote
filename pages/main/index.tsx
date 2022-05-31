@@ -26,39 +26,52 @@ const Main = (props: any) => {
 
     let _ideas = ideas;
     let _ideaToBeUpdated = ideas?.[idx];
+
     _ideaToBeUpdated["up"] = _ideaToBeUpdated?.up?.includes(idx)
       ? _ideaToBeUpdated?.up
       : [...(_ideaToBeUpdated?.up || []), idx];
+
     _ideaToBeUpdated["down"] = (_ideaToBeUpdated?.down || []).filter(
       (e: any) => e !== idx
     );
+
     _ideas[idx] = _ideaToBeUpdated;
-    author?.id !== _ideaToBeUpdated?.author?.id && dispatch(setIdeas(_ideas));
+
+    const canHeVote: Boolean = author?.id !== _ideaToBeUpdated?.author?.id;
+
+    canHeVote && dispatch(setIdeas(_ideas));
   };
 
   const disLike: Function = (idx: any) => {
     // this function will be eliminated if we use an api
     let _ideas = ideas;
     let _ideaToBeUpdated = ideas?.[idx];
+
     _ideaToBeUpdated["down"] = _ideaToBeUpdated?.down?.includes(idx)
       ? _ideaToBeUpdated?.down
       : [...(_ideaToBeUpdated?.down || []), idx];
+
     _ideaToBeUpdated["up"] = (_ideaToBeUpdated?.up || []).filter(
       (e: any) => e !== idx
     );
     _ideas[idx] = _ideaToBeUpdated;
-    author?.id !== _ideaToBeUpdated?.author?.id && dispatch(setIdeas(_ideas));
+
+    const canHeVote: Boolean = author?.id !== _ideaToBeUpdated?.author?.id;
+
+    canHeVote && dispatch(setIdeas(_ideas));
   };
   const following: Function = (idx: any, authorID: any) => {
     // this function will be eliminated if we use an api
     let _members = members;
     let _memberToBeUpdated = members?.[idx];
+
     _memberToBeUpdated["followers"] = _memberToBeUpdated?.followers?.includes(
       authorID
     )
       ? (_memberToBeUpdated?.followers || []).filter((e: any) => e !== authorID)
       : [...(_memberToBeUpdated?.followers || []), authorID];
     _members[idx] = _memberToBeUpdated;
+
     dispatch(setMembers(_members));
   };
   return (

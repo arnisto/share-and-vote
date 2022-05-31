@@ -10,6 +10,7 @@ const Header = (props: any) => {
     lastName = "Unkown",
     avatar = "/unkownMember.jpg",
   } = props;
+
   return (
     <div className={styles.container}>
       <div className={styles["author-infos"]}>

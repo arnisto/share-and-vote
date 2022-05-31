@@ -1,5 +1,5 @@
 import styles from "./Body.module.css";
-import Image from "next/image";
+
 const Body = (props: any) => {
   const { title, description } = props;
   return (

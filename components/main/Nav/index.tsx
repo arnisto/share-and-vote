@@ -7,20 +7,19 @@ import MoreIcon from "@mui/icons-material/More";
 
 const Nav = (props: any) => {
   const {} = props;
+  const _listOfIcons: any = [
+    <WidgetsIcon />,
+    <WidgetsIcon />,
+    <NotificationsIcon />,
+    <MoreIcon />,
+  ];
   return (
     <div className={styles.container}>
-      <div className={styles.icon}>
-        <WidgetsIcon />
-      </div>
-      <div className={styles.icon}>
-        <ChatIcon />
-      </div>
-      <div className={styles.icon}>
-        <NotificationsIcon />
-      </div>
-      <div className={styles.icon}>
-        <MoreIcon />
-      </div>
+      {_listOfIcons?.map((icon: any, index: any) => (
+        <div key={index} className={styles.icon}>
+          {icon}
+        </div>
+      ))}
     </div>
   );
 };
